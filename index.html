@@ -1,0 +1,65 @@
+<!DocType html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='css/bootstrap.min.css' />
+    <script src='js/angular.min.js'></script>
+    <script src='js/data.js'></script>
+    <script src='js/index.js'></script>
+</head>
+
+<body ng-app="weather" ng-controller="weatherController">
+
+    <div class="container" id="header" style="background:dodgerblue; color: white;
+    min-height: 40px;line-height: 40px;text-align: center">
+        <span ng-click="showCityList()">{{currentCity}} &darr;</span>
+    </div>
+    <ul class="list-group" ng-show="isShowCityList">
+
+        <div class="input-group">
+            <input type="search" name="" id="" ng-model="searchKey" class="form-control" value="" required="required" title="">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="search(searchKey)">搜索</button>
+            </span>
+        </div>
+
+        <li class="list-group-item" ng-repeat="city in codes">
+            <p ng-click="refreshWeather(city.code)">{{city.city}}</p>
+        </li>
+    </ul>
+    <div class="container" style="text-align: center">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <span style="color: gray; font-size: 8pt">上次更新：{{updateTime}} &uarr;</span>
+                <h1>{{currentTemp}}&deg;C<small><small>{{low}}~{{high}}</small></small></h1>
+                <p>{{date}}</p>
+                <p></p>
+                <p>{{type}}</p>
+                <p>温馨提示: <span style="color: gray;">{{tips}}</span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <hr/>
+
+    <div class="container" style="font-size: 8pt;text-align: center">
+        <div class="row">
+            <div ng-repeat="day in forecast" class="col-xs-6 col-sm-3 col-md-3 col-lg-4">
+
+                <p[>{{day.type}}</p>
+                    <p>{{day.low}}~{{day.high}}</p>
+                    <p>{{day.date}}</p>
+                    <hr/>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
